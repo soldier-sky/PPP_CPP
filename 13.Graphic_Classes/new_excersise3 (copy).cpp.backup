@@ -1,0 +1,114 @@
+#include"Simple_window.h"
+#include"Graph.h"
+//#include"../std_lib_facilities.h"
+
+namespace Graph_lib{
+
+enum class dir{
+	N=1,
+	E,
+	W,
+	S,
+	NE,
+	NW,
+	SE,
+	SW
+};
+
+
+class Arrow: public Shape{
+public:
+	Arrow()
+	{
+		m_p=Point{0,0};
+		m_len=0;
+		m_size=0;
+		m_dir=dir::E;
+	}
+	Arrow(Point p, int len, int size, dir d);       // point p with lenght len with size as size of arrow head
+	int get_length() const { return m_len; }
+	void draw_lines() const;
+	void make_arrow(string dir);
+private:
+	Point m_p;		   // origin point of arrow
+	int m_len;		   // length of arrow body
+	int  m_size;		   // size of arrow head
+	Lines m_l;		   // Line ie. body of arrow
+	dir m_dir;              // direction of arrow 
+
+};
+
+Arrow::Arrow(Point p, int len, int size, dir d):
+	m_p{p}, m_len{len}, m_size{size}, m_dir{d}
+{
+/*
+	Point p2{m_p.x+len , m_p.y};               // second point of line
+	Point phu{p2.x-m_size, p2.y-m_size};       // arrow head point up
+	Point phl{p2.x-m_size, p2.y+m_size};	   // arrow heaad lower
+
+	m_l.add(m_p, p2);                          // main axis of arrow
+	m_l.add(p2, phu);
+	m_l.add(p2, phl);
+*/
+	make_arrow(m_dir);                     // calling make_arrow
+	// perform other checks if required
+}
+
+void Arrow::make_arrow(dir d)
+{
+	Point p2;
+	
+	//Point p2{m_p.x+m_len , m_p.y};               // second point of line
+        //Point phu{p2.x-m_size, p2.y-m_size};       // arrow head point up
+        //Point phl{p2.x-m_size, p2.y+m_size};       // arrow heaad lower
+ 	
+	switch(d)
+	{
+		case dir::S :
+			p2=Point{m_p.x, m_p.y+m_len};
+			break;
+		case dir::E :
+			p2=Point{m_p.x+m_len, m_p.y};
+			break;
+
+
+	}
+
+        Point phu{p2.x-m_size, p2.y-m_size};       // arrow head point up
+        Point phl{p2.x-m_size, p2.y+m_size};       // arrow heaad lower
+        m_l.add(m_p, p2);                          // main axis of arrow
+        m_l.add(p2, phu);
+        m_l.add(p2, phl);
+
+}
+
+void Arrow::draw_lines()const{
+	if (color().visibility())
+	{
+		m_l.draw_lines();
+	}
+}
+
+};
+
+int main()
+{
+	using namespace Graph_lib;
+	
+	Point wp=Point{100,100};
+	int wl=600,ww=400;
+	Simple_window win{wp,wl,ww,"Arrow"};
+
+	Point ap=Point{200,200};
+	int len=100,size=5;
+	Arrow A(ap,len,size,Dir::S);
+	
+	win.attach(A);
+	win.wait_for_button();
+}
+
+
+
+
+
+
