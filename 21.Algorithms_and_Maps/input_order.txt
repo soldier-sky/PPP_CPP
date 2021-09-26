@@ -1,0 +1,31 @@
+Bob
+Boston
+1
+{ Apple 10 1 Banana 8 2 Kiwi 3 2 }
+
+Steve
+Canada
+3
+{Peach 10 1 Mango 8 2 Kiwi 3 2}
+
+John
+Greenwich
+4
+{ Apple 10 2 Dragon 16 2 Pineapple 3 2 }
+
+
+Joy
+Bangalore
+8
+{ Apple 10 1 Chickoo 8 2 Kiwi 3 1 }
+
+Hareesh
+Bangalore
+9
+{ Apple 10 3 Mango 8 5 Chickoo 3 2 }
+
+Peter
+Greenwich
+2
+{ Apple 10 3 Guava 9 2 Strawberry 7 2 }
+
